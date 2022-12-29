@@ -1,3 +1,4 @@
 node_modules
 .vscode
 slidev
+package-lock.json
