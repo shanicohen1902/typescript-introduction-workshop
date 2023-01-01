@@ -18,7 +18,7 @@ interface User {
   isAdmin: true,
 };
 
-const getUserId = (user: User) => {
+const getUserId = (user) => {
   return user.id;
 };
 

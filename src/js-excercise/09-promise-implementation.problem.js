@@ -31,10 +31,6 @@ Leanne Graham
 
 function getFirstUserName(url) {
   let res = fetch(url)
-    .then(res => res.json())
-    .then(json => json[0].name)
-    .catch(err => console.log(err));
-  return res;
 }
 
 describe("get first user name from users API", function () {

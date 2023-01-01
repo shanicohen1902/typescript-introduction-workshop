@@ -31,12 +31,6 @@ Leanne Graham
 
 async function getFirstUserName(url) {
   let res = await fetch(url);
-  if (!res.ok) {
-    const message = `An error has occured`;
-    throw new Error(message);
-  }
-  const json = await res.json();
-  return json[0].name;
 }
 
 describe("get first user name from users API", function () {

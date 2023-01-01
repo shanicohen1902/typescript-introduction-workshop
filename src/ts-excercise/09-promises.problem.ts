@@ -9,7 +9,7 @@ interface Person {
   gender: string;
 }
 
-export const fetchLukeSkywalker = async (): Promise<Person> => {
+export const fetchLukeSkywalker = async (): Person => {
   const data = await fetch("https://swapi.dev/api/people/1").then((res) => {
     return res.json();
   });

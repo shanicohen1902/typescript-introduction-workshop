@@ -9,7 +9,7 @@ const defaultUser = {
 };
 
 const getUserId = (user) => {
-  return user.id;
+  
 };
 
 it("Should get the user id", () => {
