@@ -1,6 +1,11 @@
+---
+title: JavaScript
+---
+
 # JavaScript
 
-Hello, World!
+For impatient programmers
+
 
 ---
 
@@ -14,6 +19,11 @@ if (helloWorld) {
 }
 ```
 
+<!--
+camelCase.  
+semicolon ;
+-->
+
 ---
 
 # Variables
@@ -22,6 +32,7 @@ let
 ```ts
 let hello = 'Hello world!';
 let message;
+hello = 'Just Hello!';
 ```
 
 const
@@ -29,78 +40,90 @@ const
 const myBirthday = '18.04.1982';
 myBirthday = '01.01.2001'; // error, can't reassign the constant!
 ```
+
+var
+```ts
+var x = 123
+```
+
+<!--
+const - immutable variable bindings
+can’t assign a different value later. 
+the value itself may be mutable and we may be able to change its contents.
+-->
+
 ---
 
-# Types
+# const
 
+```ts
+const data = ['10','20','30'];
+data[1] = '90'; // ?
+```
+---
+
+# let
+
+```ts
+let x = 5;
+{
+  let x = 10;
+}
+console.log(x); // ?
+```
+
+
+---
+
+# Primitives
+Assign
 ```ts
 // no error
 let message = "hello";
 message = 123456;
 ```
 
-Primitives
-
-```ts
-typeof 0 // "number"
-
-typeof 10n // "bigint"
-
-typeof true // "boolean"
-
-typeof "foo" // "string"
-```
----
-
-# Object
-
-An empty object
-
-```ts
-let user = new Object(); // "object constructor" syntax
-let user = {};  // "object literal" syntax
-```
-
-Literals and properties
-
-```ts
-let user = {     // an object
-  name: "John",  // by key "name" store value "John"
-  age: 30        // by key "age" store value 30
-};
-```
+<!--
+passed by value (copied)
+compared by value:
+-->
 
 ---
 
-# Object usage
+# Primitives
 
+Boolean
 ```ts
-// get property values of the object:
-console.log( user.name ); // John
-console.log( user.age ); // 30
-user.isAdmin = true;
-delete user.age;
+true
+false
 ```
 
-Square brackets
-
+Number
 ```ts
-let bag = {};
-bag['fruit'] = 'banana';
+1.141
+-123
 ```
 
-Property existence test, “in” operator
-
+String
 ```ts
-let user = { name: "John", age: 30 };
-
-console.log( "age" in user ); // true
-console.log( "blabla" in user ); // false
+'abc'
+"abc"
+`String with interpolated values: ${256} and ${true}`
 ```
+
+Bigints
+```ts
+17n
+-49n
+```
+
+<!--
+no extra type for char
+-->
 
 ---
 
-# nullish
+# None values
 
 undefind
 
@@ -116,23 +139,43 @@ null
 let age = null;
 ```
 
+<!--
+Undefined-initial value
+null -switch of
+-->
+
 ---
 
 # typeof
 
 ```ts
+typeof 0  // "number"
+
+typeof true // "boolean" 
+
+typeof "foo" // "string"
+
 typeof undefined // "undefined"
 
-typeof Math // "object"
+typeof null // "object" - why?
 
-typeof null // "object"
+typeof console.log // "function" - why?
 
-typeof console.log // "function"
 ```
 
 
 ---
 
+![Local Image](/types.png)
+
+<!--
+By value - the value of a variable is passed (copied)
+By reference - a reference to that variable is passed to the function (gives the function a way to change the contents of the variable).
+Java - All arguments to methods in Java are pass-by-value.
+js -primitives by value, objects by reference
+-->
+
+---
 
 # array
 
@@ -149,6 +192,11 @@ console.log( fruits[0] ); // Apple
 fruits[2] = 'Pear';
 console.log( fruits.length ); // 3
 ```
+
+<!--
+-There is no concept of array size
+-->
+
 ---
 
 # array storage
@@ -165,9 +213,17 @@ alert( arr[1].name ); // John
 // get the function at index 3 and run it
 arr[3](); // hello
 ```
+
+<twemoji-cat-with-tears-of-joy />
+
+```ts
+[1, 2, 3] + [4, 5, 6]; // -> '1,2,34,5,6'
+```
+
+
 ---
 
-# task
+# Array assignment
 
  
 ```ts
@@ -178,8 +234,10 @@ let shoppingCart = fruits;
 shoppingCart.push("Banana");
 
 // what's in fruits?
-alert( fruits.length ); // ?
+console.log( fruits.length ); // ?
 ```
+
+
 ---
 
 # Comparison
@@ -198,16 +256,24 @@ console.log( '01' == 1 ); //true
 ```
 
 ```ts
-console.log( true == 1 ); // true
-console.log( false == 0 ); // true
+console.log( true == 1 ); // ?
+console.log( false == 0 ); // ?
 ```
 
 ```ts
 console.log( 0 == false ); // true
 console.log( '' == false ); // true
-
-console.log( 0 === false ); // false
+console.log( 0 === false ); // ?
 ```
+
+<twemoji-cat-with-tears-of-joy />
+
+```ts
+1 < 2 < 3; // -> true
+3 > 2 > 1; // -> false
+```
+
+
 ---
 
 # loops
@@ -231,6 +297,10 @@ for (begin; condition; step) {
 ```ts
 for (let i = 0; i < 3; i++) { ... }
 ```
+```ts
+for (let item:items) { ... }
+```
+
 
 ---
 
@@ -250,6 +320,8 @@ for (;;) {
   // repeats without limits
 }
 ```
+
+
 ---
 
 # Functions
@@ -260,22 +332,13 @@ function showMessage() {
 }
 ```
 
-scope
+Anonymous function
 ```ts
-let userName = 'John';
-
-function showMessage() {
-  let userName = "Bob"; // declare a local variable
-
-  let message = 'Hello, ' + userName; // Bob
-  console.log(message);
+function () {
+  console.log( 'Hello everyone!' );
 }
-
-// the function will create and use its own userName
-showMessage();
-
-console.log( userName ); // ?
 ```
+
 
 ---
 
@@ -324,20 +387,36 @@ function sayHi() {
 sayHi(); // Hello 
 console.log( sayHi ); //?
 ```
+
+<!--
+An expression is a piece of code that can be evaluated to produce a value.
+-->
+
 ---
 
 # Arrow functions, the basics
 
+A simple one
 ```ts
-let func = (arg1, arg2, ..., argN) => expression;
-```
-
-the same as
-```ts
-let func = function(arg1, arg2, ..., argN) {
+let myFunc = function(arg1) {
   return expression;
 };
 ```
+the same as
+```ts
+let myFunc = (arg1) => {
+  return expression;
+}
+```
+the same as
+```ts
+let myFunc = (arg1) => expression;
+```
+the same as
+```ts
+let myFunc = arg1 => expression;
+```
+
 
 ---
 
@@ -355,18 +434,132 @@ let sum = function(a, b) {
 
 console.log( sum(1, 2) ); // 3
 ```
+
 ---
 
-# Multiline arrow function
+# Object
+
+An empty object
 
 ```ts
-let sum = (a, b) => {  // the curly brace opens a multiline function
-  let result = a + b;
-  return result; // if we use curly braces, then we need an explicit "return"
-};
-
-console.log( sum(1, 2) ); // 3
+const user = new Object(); // "object constructor" syntax
+const user = {};  // "object literal" syntax
 ```
+
+The two ways of using objects
+
+```ts
+const user = {     // an object
+  name: "John",  // by key "name" store value "John"
+  age: 30        // by key "age" store value 30
+};
+```
+```ts
+const user = {};
+user['name'] = "john";
+user['age'] = 30;
+```
+
+Which to use?
+
+<!--
+- mutable
+- garbage collection
+-->
+
+---
+
+# Compare Objects
+
+```ts
+const obj = {}; 
+assert.equal(obj === obj, true);
+assert.equal({} === {}, false); //?
+```
+
+<!--
+- mutable
+- garbage collection
+-->
+
+---
+
+# Object properties
+
+```ts
+// get property values of the object:
+console.log( user.name ); // John
+console.log( user.age ); // 30
+user.isAdmin = true;
+delete user.age;
+```
+
+Square brackets
+
+```ts
+let bag = {};
+bag['fruit'] = 'banana';
+```
+
+Property existence test, “in” operator
+
+```ts
+let user = { name: "John", age: 30 };
+
+console.log( "age" in user ); // true
+console.log( "blabla" in user ); // false
+```
+
+
+---
+
+# Create object by function
+
+```ts
+function User(name, age) {
+  this.name = name;
+  this.age = age;
+}
+```
+
+Instantiate
+
+```ts
+let user = new User("John", 30);
+```
+---
+
+# Create object by class
+
+Class 
+```ts
+Class user { 
+  constructor(name, age){
+   	this.name = name;
+    this.age = age;
+  }
+  connect(message){
+    // whatever
+  }
+};
+```
+
+```ts
+let user = new User("John", 30);
+```
+
+<!--
+-Class is a syntetic sugar
+-->
+
+---
+
+# That's it!
+
+<div class="p-3">
+  <Tweet id="1606946307620458496" />
+</div>
+
 
 ---
 
@@ -401,16 +594,6 @@ Unknown
 const myUnknownVariable: unknown = "str";
 const myAnyVariable: any = "str";
 ```
----
-
-# Page 3
-
-You can directly use Windi CSS and Vue components to style and enrich your slides.
-
-<div class="p-3">
-  <Tweet id="20" />
-</div>
-
 ---
 
 # Types

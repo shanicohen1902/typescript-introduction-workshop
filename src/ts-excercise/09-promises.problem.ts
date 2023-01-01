@@ -1,4 +1,4 @@
-interface LukeSkywalker {
+interface Person {
   name: string;
   height: string;
   mass: string;
@@ -9,7 +9,7 @@ interface LukeSkywalker {
   gender: string;
 }
 
-export const fetchLukeSkywalker = async (): LukeSkywalker => {
+export const fetchLukeSkywalker = async (): Person => {
   const data = await fetch("https://swapi.dev/api/people/1").then((res) => {
     return res.json();
   });
