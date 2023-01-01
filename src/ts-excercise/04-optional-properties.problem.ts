@@ -1,7 +1,10 @@
 import { expect, it } from "vitest";
 
-export const getName = (params: { first: string; last: string }) => {
-
+export const getName = (params: { first: string; last?: string }) => {
+  if (params.last) {
+    return `${params.first} ${params.last}`;
+  }
+  return params.first;
 };
 
 it("Should get the first and last name", () => {

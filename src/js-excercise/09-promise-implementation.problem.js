@@ -37,7 +37,8 @@ function getFirstUserName(url) {
   return res;
 }
 
-describe("get first name", function () {
+describe("get first user name from users API", function () {
+
   it("should get the first name", function () {
     getFirstUserName(url)
       .then(function (data) {

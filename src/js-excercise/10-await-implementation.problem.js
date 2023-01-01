@@ -39,7 +39,8 @@ async function getFirstUserName(url) {
   return json[0].name;
 }
 
-describe("get first name", function () {
+describe("get first user name from users API", function () {
+  
   it("should get the first name", async function () {
     const data = await getFirstUserName(url)
       assert.equal(data, "Leanne Graham");
