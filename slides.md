@@ -9,19 +9,37 @@ For impatient programmers
 
 ---
 
+
+<img src="/easy.gif" class="m-20 h-80 rounded shadow" />
+
+
+---
+
+
+<img src="/weird.gif" class="m-20 h-80 rounded shadow" />
+
+
+---
+
+
+<img src="/distopia.gif" class="m-20 h-80 rounded shadow" />
+
+
+---
+
 # Syntax
 
 ```ts
 let helloWorld = true;
 
 if (helloWorld) {
-  console.log('The code is easy to read');
+  console.log('This code is easy to read');
 }
 ```
 
 <!--
 camelCase.  
-semicolon ;
+semicolon ;Dynamically typed
 -->
 
 ---
@@ -62,30 +80,60 @@ data[1] = '90'; // ?
 ```
 ---
 
-# let
+# var
 
-```ts
+```ts {monaco}
 let x = 5;
 {
   let x = 10;
+  
+  if(true){
+    let x = 8;
+    var y = 'hoisted!';
+  }
+  console.log(y); // 'hoisted!'
 }
-console.log(x); // ?
 ```
 
+<!--
+bit weird!
+-->
+
+---
+
+# var
+
+```ts {monaco}
+let x = 5;
+{
+  let x = 10;
+  
+  if(true){
+    let x = 8;
+    var y = 'hoisted!';
+  }
+  console.log(y); // 'hoisted!'
+}
+```
+
+<!--
+bit weird!
+-->
 
 ---
 
 # Primitives
 Assign
-```ts
+```js {monaco}
 // no error
 let message = "hello";
 message = 123456;
 ```
 
 <!--
-passed by value (copied)
-compared by value:
+1. passed by value (copied)
+2. compared by value
+3.seven types
 -->
 
 ---
@@ -163,6 +211,9 @@ typeof console.log // "function" - why?
 
 ```
 
+<!--
+null  is.a.primitive(bug)
+-->
 
 ---
 
@@ -173,6 +224,7 @@ By value - the value of a variable is passed (copied)
 By reference - a reference to that variable is passed to the function (gives the function a way to change the contents of the variable).
 Java - All arguments to methods in Java are pass-by-value.
 js -primitives by value, objects by reference
+Allnon.primitivesinherit frombject
 -->
 
 ---
@@ -192,7 +244,7 @@ console.log( fruits[0] ); // Apple
 fruits[2] = 'Pear';
 console.log( fruits.length ); // 3
 ```
-
+tip - use functional when you can
 <!--
 -There is no concept of array size
 -->
@@ -332,13 +384,24 @@ function showMessage() {
 }
 ```
 
-Anonymous function
+<!--
+Function is an object
+-->
+
+---
+
+# Anonymous function
+
+
 ```ts
 function () {
-  console.log( 'Hello everyone!' );
+  console.log( 'I have no name!' );
 }
 ```
 
+<!--
+Function is an object
+-->
 
 ---
 
@@ -416,7 +479,6 @@ the same as
 ```ts
 let myFunc = arg1 => expression;
 ```
-
 
 ---
 
@@ -497,19 +559,27 @@ delete user.age;
 Square brackets
 
 ```ts
-let bag = {};
+const bag = {};
 bag['fruit'] = 'banana';
 ```
 
 Property existence test, “in” operator
 
 ```ts
-let user = { name: "John", age: 30 };
+const user = { name: "John", age: 30 };
 
 console.log( "age" in user ); // true
 console.log( "blabla" in user ); // false
 ```
 
+---
+
+# Clone
+```ts
+const anotherUser = { ...user };
+// or
+const anotherUser = Object.assign(user, { name: "John"})
+```
 
 ---
 
@@ -565,108 +635,203 @@ let user = new User("John", 30);
 
 # TypeScript
 
-Hello, World!
+![Local Image](/viralhog-spider.gif)
+
+---
+
+#### Install tsc compiler
+
+```bash
+npm i typescript
+
+```
+
+#### Compile file
+```bash
+tsc index.ts
+```
+
+---
+
+# Customize
+
+touch tsconfig.json
+
+```json
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "watch": true
+  }
+}
+```
+
+---
+
+# Autocomplete
+
+```bash
+npm i -D @types/lodash
+```
 
 ---
 
 # Types
 
 Primitives
-```ts
-const myStringVariable: string = "str";
+```ts {monaco}
+let myStringVariable = "str"; // implicit
+let anotherStringVariable:string = "str"; //explicit
+
+myStringVariable = 10; 
 ```
 
 Object
-```ts
+```ts {monaco}
 const myObjectVariable: object = "str"; // error
 const myObjectVariable2: object = {};
 ```
 
 Any
-```ts
-let myAnyVariable: any = "str";
+```ts {monaco}
+let myAnyVariable; // any
+let anotherAnyVariable:any = 'banana'; // any
+
 myAnyVariable = 10;
 myAnyVariable = true;
 ```
 
-Unknown
-```ts
-const myUnknownVariable: unknown = "str";
-const myAnyVariable: any = "str";
-```
 ---
 
 # Types
 
-Union
-```ts
+Unknown
+```ts {monaco}
+const myUnknownVariable: unknown = "str";
+const myStrVariable = "str";
+myStrVariable = myUnknownVariable;
+```
+
+<!--
+unknown-assigning the variable of unknown type to anything else is not possible
+-->
+
+---
+
+# Union
+
+
+```ts {monaco}
 let myUnionVariable: string | number = "str";
 myUnionVariable = 10;
 myUnionVariable = false; // error
 ```
 ---
 
-# Types
+# Literals
 
-Literals
-```ts
+
+```ts {monaco}
 let myStringLiteral: "str" = "str";
 let myNumberLiteral: 10 = 10;
 let myBooleanLiteral: true = true;
 
 myStringLiteral = "string"; // error
 myNumberLiteral = 1; // error
-myBooleanLiteral = false // error
+myBooleanLiteral = false; // error
 ```
 ---
 
-# Types
+# Array of
 
-Array of strings
-```ts
-const myStringArrayVariable: string[] = ["str", "str"]; 
+Array of type
+```ts {monaco}
+const myStringArrayVariable: string[] = ["banana", "pizza"];
+myStringArrayVariable.push(10) // error
+
+const anotherStringArrayVariable = ["banana", "pizza"];
+myStringArrayVariable.push(10) // error
 ```
-Array of string and numbers
-```ts
+Array of types
+```ts {monaco}
 const myUnionArrayVariable: (string | number)[] = ["str", 10];
-const myLiteralArrayVariable: ("str")[] = ["str","str"];
+
+const myLiteralArrayVariable: ("banana" | "strawberry")[] = ["banana","strawberry"];
+myLiteralArrayVariable.push("orange") //error
 ```
+
+
 ---
 
-# enum
-```ts
+# Enum
+
+```ts {monaco}
 enum Color {Red, Green, Blue};
-```
-```ts
+
 Color.Red // 0
 Color.Blue // 2
 Color[1] // "Green"
 Color[2] // "Blue"
 ```
 
+
 ---
 
 # Function
-```ts
-function myFunction(myStringArg: string, myNumberArg: number): void
+```ts {monaco}
+function myFunction(myStringArg, myNumberArg) // error
+{
+	// code
+}
+
+
+function anotherFunction(myStringArg: string, myNumberArg: number): string
 {
 	// code
 }
 ```
-```ts
+
+```ts {monaco}
 const myFunctionExpression: (arg: string, arg2: number) => void =
 (arg, arg2) => {
 	// code
 }
 ```
+
+
 ---
 
-# Type inference
+# Interface
+
+```ts {monaco}
+interface LabeledValue {
+  label: string;
+}
+```
+
+# Type
+
+```ts {monaco}
+type Puppy = {
+  toys: number;
+};
+```
+
+<!--
+Interface extandable
+-->
+---
+
+# Generics
+
 ```ts
-const myStringVariable = "str"; // string
-const myNumberVariable = 10; // number
-const myObjectVariable = {
-    str: "str",
-    num: 10
-}; // {str: string, num: number}
+function getArray<T>(items : T[] ) : T[] {
+    return new Array<T>().concat(items);
+}
+```
+---
+
+```ts
+console.log('Goodbye');
+exit();
 ```
