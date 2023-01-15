@@ -39,7 +39,8 @@ if (helloWorld) {
 
 <!--
 camelCase.  
-semicolon ;Dynamically typed
+semicolon ;Dynamically typed - what doe's it means? there is no type. the type is on run time
+python - optional typing
 -->
 
 ---
@@ -89,13 +90,16 @@ let x = 5;
   
   if(true){
     let x = 8;
+    var y = 'hoisted!';
   }
-  console.log(x); // 'hoisted!'
+  console.log(y); // 'hoisted!'
 }
 ```
 
 <!--
-bit weird!
+global scope
+local scope
+if / block scope
 -->
 
 ---
@@ -222,8 +226,12 @@ null  is.a.primitive(bug)
 By value - the value of a variable is passed (copied)
 By reference - a reference to that variable is passed to the function (gives the function a way to change the contents of the variable).
 Java - All arguments to methods in Java are pass-by-value.
+
 js -primitives by value, objects by reference
 Allnon.primitivesinherit frombject
+
+objects at the heap
+primitives at the stack
 -->
 
 ---
@@ -244,8 +252,11 @@ fruits[2] = 'Pear';
 console.log( fruits.length ); // 3
 ```
 tip - use functional when you can
+
 <!--
--There is no concept of array size
+- dynamic collection
+- also set 
+- also map that it's like an object but it has more features
 -->
 
 ---
@@ -274,20 +285,21 @@ arr[3](); // hello
 
 ---
 
-# Array assignment
+# Map
 
  
 ```ts
-let fruits = ["Apples", "Pear", "Orange"];
+const dict = new Map ([
+  ["Apples",1], ["Pear",9], ["Orange",2]
+]);
 
-// push a new value into the "copy"
-let shoppingCart = fruits;
-shoppingCart.push("Banana");
-
-// what's in fruits?
-console.log( fruits.length ); // ?
 ```
 
+<!--
+- not garbage collected!
+use weakmap
+also set
+-->
 
 ---
 
@@ -323,6 +335,123 @@ console.log( 0 === false ); // ?
 1 < 2 < 3; // -> true
 3 > 2 > 1; // -> false
 ```
+---
+
+# Object
+
+An empty object
+
+```ts
+const user = new Object(); 
+const user = {};  
+```
+
+The two ways of using objects
+
+```ts
+const user = {    
+  name: "John",  
+  age: 30
+};
+```
+```ts
+const user = {};
+user['name'] = "john";
+user['age'] = 30;
+```
+
+Which to use?
+
+<!--
+- collection of key val
+- the val can be anything (even func)
+- mutable
+- garbage collection
+-->
+
+---
+
+# Object properties
+
+```ts
+console.log( user.name ); 
+user.isAdmin = true;
+delete user.age;
+```
+
+Square brackets
+
+```ts
+const bag = {};
+bag['fruit'] = 'banana';
+```
+
+Property existence test, “in” operator
+
+```ts
+const user = { name: "John", age: 30 };
+
+console.log( "age" in user ); // true
+console.log( "blabla" in user ); // false
+```
+
+<!--
+- mutable
+- garbage collection
+-->
+
+---
+
+# Compare Objects
+
+```ts
+const obj = {}; 
+assert.equal(obj === obj, true);
+assert.equal({} === {}, false); //?
+```
+
+
+---
+
+# Clone
+```ts
+const anotherUser = { ...user };
+// or
+const anotherUser = Object.assign(user, { name: "John"})
+
+// deep?
+```
+
+
+---
+
+# Create object by class
+
+Class 
+```ts
+Class User { 
+  constructor(name, age){
+   	this.name = name;
+    this.age = age;
+  }
+  connect(message){
+    // whatever
+  }
+};
+```
+
+```ts
+let user = new User("John", 30);
+```
+
+<!--
+does it used? yes!
+static - global to the class
+-->
+
+---
+
+<img src="/assets/homer-simpson-eat.gif" class="m-20 h-80 rounded shadow" />
 
 
 ---
@@ -385,6 +514,12 @@ function showMessage() {
 
 <!--
 Function is an object
+when using the word function - function definition
+
+can be nested (and then it's closure) to encapsulate logic
+
+function usually stores at the stack
+internal function can access to the outer variables since it stores the outer functions at the heap
 -->
 
 ---
@@ -422,6 +557,11 @@ function showMessage(from, text = anotherFunction()) {
   // its result becomes the value of text
 }
 ```
+
+<!--
+can be a parameter or return value
+-->
+
 ---
 
 # Function expression
@@ -495,118 +635,6 @@ console.log( sum(1, 2) ); // 3
 
 ---
 
-# Object
-
-An empty object
-
-```ts
-const user = new Object(); 
-const user = {};  
-```
-
-The two ways of using objects
-
-```ts
-const user = {    
-  name: "John",  
-  age: 30
-};
-```
-```ts
-const user = {};
-user['name'] = "john";
-user['age'] = 30;
-```
-
-Which to use?
-
-<!--
-- mutable
-- garbage collection
--->
-
----
-
-# Object properties
-
-```ts
-console.log( user.name ); 
-user.isAdmin = true;
-delete user.age;
-```
-
-Square brackets
-
-```ts
-const bag = {};
-bag['fruit'] = 'banana';
-```
-
-Property existence test, “in” operator
-
-```ts
-const user = { name: "John", age: 30 };
-
-console.log( "age" in user ); // true
-console.log( "blabla" in user ); // false
-```
-
-<!--
-- mutable
-- garbage collection
--->
-
----
-
-# Compare Objects
-
-```ts
-const obj = {}; 
-assert.equal(obj === obj, true);
-assert.equal({} === {}, false); //?
-```
-
-
----
-
-# Clone
-```ts
-const anotherUser = { ...user };
-// or
-const anotherUser = Object.assign(user, { name: "John"})
-
-// deep?
-```
-
-
----
-
-
-# Create object by class
-
-Class 
-```ts
-Class user { 
-  constructor(name, age){
-   	this.name = name;
-    this.age = age;
-  }
-  connect(message){
-    // whatever
-  }
-};
-```
-
-```ts
-let user = new User("John", 30);
-```
-
----
-
-<img src="/assets/homer-simpson-eat.gif" class="m-20 h-80 rounded shadow" />
-
----
-
 # That's it!
 
 <div class="p-3">
@@ -619,6 +647,25 @@ let user = new User("John", 30);
 # TypeScript
 
 ![Local Image](/assets/viralhog-spider.gif)
+
+<!--
+(if you don't write tests)
+
+open source by microsoft
+super set of js - every ts is also a js
+
+strongly type - no option to change type
+weakly typed - conversion of type
+compile - translate java to nachine code / vm (most of static languages)
+ts - translate to another language. transpilation
+js - interpreted (most of dynamic languages) JIT
+
+data instead of abstraction
+
+how does it effect on your code?
+and on efficiency? 
+changes ?
+-->
 
 ---
 

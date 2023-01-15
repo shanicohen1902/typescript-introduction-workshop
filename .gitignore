@@ -1,4 +1,5 @@
 node_modules
 .vscode
-slidev
+slidev/node_modules
+
 package-lock.json
