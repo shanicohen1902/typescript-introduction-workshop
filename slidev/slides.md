@@ -38,9 +38,10 @@ if (helloWorld) {
 ```
 
 <!--
-camelCase.  
-semicolon ;Dynamically typed - what doe's it means? there is no type. the type is on run time
+Dynamically typed - what doe's it means? there is no type. the type is on run time
 python - optional typing
+camelCase.  
+semicolon ;
 -->
 
 ---
@@ -90,9 +91,8 @@ let x = 5;
   
   if(true){
     let x = 8;
-    var y = 'hoisted!';
   }
-  console.log(y); // 'hoisted!'
+  console.log(x); // ?
 }
 ```
 
@@ -128,12 +128,14 @@ bit weird!
 # Primitives
 Assign
 ```js {monaco}
-// no error
+// no worries
 let message = "hello";
 message = 123456;
 ```
 
 <!--
+wanted to put a gif but
+  - stack
 1. passed by value (copied)
 2. compared by value
 3.seven types
@@ -153,6 +155,7 @@ Number
 ```ts
 1.141
 -123
+0.1 + 0.2 = ?
 ```
 
 String
@@ -183,6 +186,7 @@ let age;
 
 console.log(age); // shows "undefined"
 ```
+<br/><br/>
 
 null
 
@@ -193,6 +197,7 @@ let age = null;
 <!--
 Undefined-initial value
 null -switch of
+garbage collection
 -->
 
 ---
@@ -243,6 +248,7 @@ Empty array
 let arr = new Array();
 let arr = [];
 ```
+<br/><br/>
 
 Array usage
 ```ts
@@ -251,12 +257,10 @@ console.log( fruits[0] ); // Apple
 fruits[2] = 'Pear';
 console.log( fruits.length ); // 3
 ```
-tip - use functional when you can
 
 <!--
-- dynamic collection
-- also set 
-- also map that it's like an object but it has more features
+- init new array
+- starts from 0
 -->
 
 ---
@@ -269,19 +273,21 @@ Array can store any type
 // mix of values
 let arr = [ 'Apple', { name: 'John' }, true, function() { alert('hello'); } ];
 
-// get the object at index 1 and then show its name
 console.log( arr[1].name ); // John
 
-// get the function at index 3 and run it
 arr[3](); // hello
 ```
 
 <twemoji-cat-with-tears-of-joy />
 
 ```ts
-[1, 2, 3] + [4, 5, 6]; // -> '1,2,34,5,6'
+[1, 2, 3] + [4, 5, 6] = ?
 ```
 
+<!--
+- dynamic collection
+- list of different types
+-->
 
 ---
 
@@ -305,10 +311,42 @@ also set
 
 # Comparison
 
+
+```ts
+console.log( '2' > 1 ); // true
+console.log( '01' == 1 ); //true
+console.log( '01' === 1 ); //true
+```
+<br/><br/>
+
+```ts
+console.log( true == 1 ); // ?
+console.log( false == 0 ); // ?
+```
+<br/><br/>
+
 ```ts
 console.log( 2 > 1 );  // true
-console.log( 2 == 1 ); // false 
 console.log( 'Z' > 'A' ); // true 
+```
+<br/><br/>
+
+<twemoji-cat-with-tears-of-joy />
+
+```ts
+1 < 2 < 3; // -> true
+3 > 2 > 1; // -> false
+```
+
+<!--
+# Comparison
+
+```ts
+console.log( 2 > 1 );  // true
+console.log( 'Z' > 'A' ); // true 
+console.log( 2 == '2' ); // true 
+console.log( 2 === '2' ); // false 
+
 ```
 
 Comparison of different types
@@ -323,11 +361,6 @@ console.log( true == 1 ); // ?
 console.log( false == 0 ); // ?
 ```
 
-```ts
-console.log( 0 == false ); // true
-console.log( '' == false ); // true
-console.log( 0 === false ); // ?
-```
 
 <twemoji-cat-with-tears-of-joy />
 
@@ -335,6 +368,14 @@ console.log( 0 === false ); // ?
 1 < 2 < 3; // -> true
 3 > 2 > 1; // -> false
 ```
+-->
+
+---
+layout: center
+---
+
+# Is there any way to avoid unexpected behavior at runtime?
+
 ---
 
 # Object
@@ -354,13 +395,12 @@ const user = {
   age: 30
 };
 ```
+
 ```ts
 const user = {};
 user['name'] = "john";
 user['age'] = 30;
 ```
-
-Which to use?
 
 <!--
 - collection of key val
@@ -374,25 +414,24 @@ Which to use?
 # Object properties
 
 ```ts
-console.log( user.name ); 
-user.isAdmin = true;
-delete user.age;
-```
-
-Square brackets
-
-```ts
-const bag = {};
-bag['fruit'] = 'banana';
-```
-
-Property existence test, “in” operator
-
-```ts
 const user = { name: "John", age: 30 };
 
 console.log( "age" in user ); // true
 console.log( "blabla" in user ); // false
+
+console.log( user.name ); 
+
+user.isAdmin = true;
+
+delete user.age;
+```
+
+Print objects
+
+```ts
+str = JSON.stringify(obj);
+str = JSON.stringify(obj, null, 4); // (Optional) beautiful indented output.
+console.log(str);
 ```
 
 <!--
@@ -708,19 +747,14 @@ npm i -D @types/lodash
 
 # Types
 
-Primitives
+
 ```ts {monaco}
 let myStringVariable = "str"; // implicit
 let anotherStringVariable:string = "str"; //explicit
 
 myStringVariable = 10; 
 ```
-
-Object
-```ts {monaco}
-const myObjectVariable: object = "str"; // error
-const myObjectVariable2: object = {};
-```
+<br/><br/>
 
 Any
 ```ts {monaco}
@@ -730,6 +764,7 @@ let anotherAnyVariable:any = 'banana'; // any
 myAnyVariable = 10;
 myAnyVariable = true;
 ```
+
 
 ---
 
@@ -774,20 +809,12 @@ myBooleanLiteral = false; // error
 
 # Array of
 
-Array of type
 ```ts {monaco}
 const myStringArrayVariable: string[] = ["banana", "pizza"];
 myStringArrayVariable.push(10) // error
 
 const anotherStringArrayVariable = ["banana", "pizza"];
 myStringArrayVariable.push(10) // error
-```
-Array of types
-```ts {monaco}
-const myUnionArrayVariable: (string | number)[] = ["str", 10];
-
-const myLiteralArrayVariable: ("banana" | "strawberry")[] = ["banana","strawberry"];
-myLiteralArrayVariable.push("orange") //error
 ```
 
 
@@ -821,13 +848,6 @@ function anotherFunction(myStringArg: string, myNumberArg: number): string
 }
 ```
 
-```ts {monaco}
-const myFunctionExpression: (arg: string, arg2: number) => void =
-(arg, arg2) => {
-	// code
-}
-```
-
 
 ---
 
@@ -838,18 +858,19 @@ interface LabeledValue {
   label: string;
 }
 ```
-
+<br/><br/>
 # Type
 
 ```ts {monaco}
-type Puppy = {
-  toys: number;
+type Car = {
+  model: number;
 };
 ```
 
 <!--
 Interface extandable
 -->
+
 ---
 
 # Generics
