@@ -573,7 +573,8 @@ function () {
 ```
 
 <!--
-Function is an object
+why?
+local usage
 -->
 
 ---
@@ -588,6 +589,7 @@ function showMessage(from, text = "no text given") {
 
 showMessage("Ann"); // ?
 ```
+<br/><br/>
 
 Complex expression
 ```ts
@@ -611,6 +613,7 @@ function sayHi() {
   console.log( "Hello" );
 }
 ```
+<br/><br/>
 
 Function Expression:
 ```ts
@@ -618,10 +621,11 @@ let sayHi = function() {
   console.log( "Hello" );
 };
 ```
+<br/><br/>
 
 ```ts
 sayHi(); // Hello 
-console.log( sayHi ); //?
+console.log( sayHi ); 
 ```
 
 <!--
@@ -638,17 +642,19 @@ let myFunc = function(arg1) {
   return expression;
 };
 ```
+<br/><br/>
+
 the same as
 ```ts
 let myFunc = (arg1) => {
   return expression;
 }
 ```
-the same as
+<br/><br/>
 ```ts
 let myFunc = (arg1) => expression;
 ```
-the same as
+<br/><br/>
 ```ts
 let myFunc = arg1 => expression;
 ```
@@ -661,12 +667,11 @@ let myFunc = arg1 => expression;
 ```ts
 let sum = (a, b) => a + b;
 
-/* This arrow function is a shorter form of:
 
 let sum = function(a, b) {
   return a + b;
 };
-*/
+
 
 console.log( sum(1, 2) ); // 3
 ```
