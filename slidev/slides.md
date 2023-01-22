@@ -9,21 +9,27 @@ For impatient programmers
 
 ---
 
-
 <img src="/assets/easy.gif" class="m-20 h-80 rounded shadow" />
 
+<!--
+easy to start
+-->
 
 ---
-
 
 <img src="/assets/weird.gif" class="m-20 h-80 rounded shadow" />
 
+<!--
+Weird
+-->
 
 ---
 
-
 <img src="/assets/distopia.gif" class="m-20 h-80 rounded shadow" />
 
+<!--
+caotic ecosystem
+-->
 
 ---
 
@@ -38,7 +44,8 @@ if (helloWorld) {
 ```
 
 <!--
-Dynamically typed - what doe's it means? there is no type. the type is on run time
+Dynamically typed - when type enforced
+Weakly typed - Conversion from one data type to another data type must be done explicitly,
 python - optional typing
 camelCase.  
 semicolon ;
@@ -136,6 +143,7 @@ message = 123456;
 <!--
 wanted to put a gif but
   - stack
+  Weakly type!
 1. passed by value (copied)
 2. compared by value
 3.seven types
@@ -225,6 +233,47 @@ null  is.a.primitive(bug)
 
 ---
 
+# Comparison
+
+
+```ts
+console.log( '2' > 1 ); // true
+console.log( '01' == 1 ); //true
+console.log( '01' === 1 ); //false
+```
+<br/><br/>
+
+```ts
+console.log( true == 1 ); // ?
+console.log( false == 0 ); // ?
+```
+<br/><br/>
+
+```ts
+console.log( 2 > 1 );  // true
+console.log( 'Z' > 'A' ); // true 
+```
+<br/><br/>
+
+<twemoji-cat-with-tears-of-joy />
+
+```ts
+1 < 2 < 3; // -> true
+3 > 2 > 1; // -> false
+```
+
+<!--
+Loose equality vs Strict equality
+-->
+
+---
+layout: center
+---
+
+# Is there any way to avoid unexpected behavior at runtime?
+
+---
+
 ![Local Image](/assets/types.png)
 
 <!--
@@ -238,144 +287,6 @@ Allnon.primitivesinherit frombject
 objects at the heap
 primitives at the stack
 -->
-
----
-
-# array
-
-Empty array
-```ts
-let arr = new Array();
-let arr = [];
-```
-<br/><br/>
-
-Array usage
-```ts
-let fruits = ["Apple", "Orange", "Plum"];
-console.log( fruits[0] ); // Apple
-fruits[2] = 'Pear';
-console.log( fruits.length ); // 3
-```
-
-<!--
-- init new array
-- starts from 0
--->
-
----
-
-# array storage
-
-Array can store any type
-
-```ts
-// mix of values
-let arr = [ 'Apple', { name: 'John' }, true, function() { alert('hello'); } ];
-
-console.log( arr[1].name ); // John
-
-arr[3](); // hello
-```
-
-<twemoji-cat-with-tears-of-joy />
-
-```ts
-[1, 2, 3] + [4, 5, 6] = ?
-```
-
-<!--
-- dynamic collection
-- list of different types
--->
-
----
-
-# Map
-
- 
-```ts
-const dict = new Map ([
-  ["Apples",1], ["Pear",9], ["Orange",2]
-]);
-
-```
-
-<!--
-- not garbage collected!
-use weakmap
-also set
--->
-
----
-
-# Comparison
-
-
-```ts
-console.log( '2' > 1 ); // true
-console.log( '01' == 1 ); //true
-console.log( '01' === 1 ); //true
-```
-<br/><br/>
-
-```ts
-console.log( true == 1 ); // ?
-console.log( false == 0 ); // ?
-```
-<br/><br/>
-
-```ts
-console.log( 2 > 1 );  // true
-console.log( 'Z' > 'A' ); // true 
-```
-<br/><br/>
-
-<twemoji-cat-with-tears-of-joy />
-
-```ts
-1 < 2 < 3; // -> true
-3 > 2 > 1; // -> false
-```
-
-<!--
-# Comparison
-
-```ts
-console.log( 2 > 1 );  // true
-console.log( 'Z' > 'A' ); // true 
-console.log( 2 == '2' ); // true 
-console.log( 2 === '2' ); // false 
-
-```
-
-Comparison of different types
-
-```ts
-console.log( '2' > 1 ); // true
-console.log( '01' == 1 ); //true
-```
-
-```ts
-console.log( true == 1 ); // ?
-console.log( false == 0 ); // ?
-```
-
-
-<twemoji-cat-with-tears-of-joy />
-
-```ts
-1 < 2 < 3; // -> true
-3 > 2 > 1; // -> false
-```
--->
-
----
-layout: center
----
-
-# Is there any way to avoid unexpected behavior at runtime?
-
 ---
 
 # Object
@@ -495,6 +406,79 @@ static - global to the class
 
 ---
 
+# array
+
+Empty array
+```ts
+let arr = new Array();
+let arr = [];
+```
+<br/><br/>
+
+Array usage
+```ts
+let fruits = ["Apple", "Orange", "Plum"];
+console.log( fruits[0] ); // Apple
+fruits[2] = 'Pear';
+console.log( fruits.length ); // 3
+```
+
+<!--
+- init new array
+- starts from 0
+-->
+
+---
+
+# array storage
+
+Array can store any type
+
+```ts
+// mix of values
+let arr = [ 'Apple', { name: 'John' }, true, function() { alert('hello'); } ];
+
+console.log( arr[1].name ); // John
+
+arr[3](); // hello
+```
+
+<twemoji-cat-with-tears-of-joy />
+
+```ts
+[1, 2, 3] + [4, 5, 6] = ?
+```
+
+<!--
+- dynamic collection
+- list of different types
+-->
+
+---
+
+# Map
+
+ 
+```ts
+const dict = new Map ([
+  ["Apples",1], ["Pear",9], ["Orange",2]
+]);
+
+```
+
+<!--
+- not garbage collected!
+Key Types
+Key size
+Optimized for frequect inserts/removals
+Ordered!
+
+use weakmap
+also set
+-->
+
+---
+
 # loops
 
 while
@@ -520,6 +504,9 @@ for (let i = 0; i < 3; i++) { ... }
 for (let item:items) { ... }
 ```
 
+<!--
+Use map/filter/reduce when you can
+-->
 
 ---
 
@@ -559,6 +546,8 @@ can be nested (and then it's closure) to encapsulate logic
 
 function usually stores at the stack
 internal function can access to the outer variables since it stores the outer functions at the heap
+
+not have to be declared before used
 -->
 
 ---
@@ -760,7 +749,6 @@ let anotherStringVariable:string = "str"; //explicit
 myStringVariable = 10; 
 ```
 <br/><br/>
-
 Any
 ```ts {monaco}
 let myAnyVariable; // any
@@ -847,7 +835,7 @@ function myFunction(myStringArg, myNumberArg) // error
 }
 
 
-function anotherFunction(myStringArg: string, myNumberArg: number): string
+function anotherFunction(myStringArg: string, myNumberArg?: number): string
 {
 	// code
 }
@@ -856,19 +844,29 @@ function anotherFunction(myStringArg: string, myNumberArg: number): string
 
 ---
 
-# Interface
+## Object Literals
 
 ```ts {monaco}
-interface LabeledValue {
-  label: string;
+interface Car {
+  model: number;
+  color?: string;
 }
-```
-<br/><br/>
-# Type
 
+```
 ```ts {monaco}
 type Car = {
   model: number;
+};
+```
+```ts {monaco}
+const myCar: Car = {
+  model: 2021,
+};
+```
+<br/><br/>
+```ts {monaco}
+const myCar: { model:number } = {
+  model: 2021,
 };
 ```
 
@@ -878,13 +876,13 @@ Interface extandable
 
 ---
 
-# Generics
+# instanceof
 
 ```ts
-function getArray<T>(items : T[] ) : T[] {
-    return new Array<T>().concat(items);
-}
+myCar instanceof Car; // ?
 ```
+
+
 ---
 
 ```ts
