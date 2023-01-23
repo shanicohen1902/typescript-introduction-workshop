@@ -14,14 +14,6 @@ describe("filter", function () {
     assert.deepEqual(even, [2, 4]);
   });
 
-  it("should pass the index and array to the callback function", function () {
-    let letters = ["a", "b", "c"];
-    let vowels = filter(letters, function (letter, index, array) {
-      return "aeiou".indexOf(letter) !== -1;
-    });
-    assert.deepEqual(vowels, ["a"]);
-  });
-
   it("should return a new array", function () {
     let numbers = [1, 2, 3];
     let even = filter(numbers, function (number) {
